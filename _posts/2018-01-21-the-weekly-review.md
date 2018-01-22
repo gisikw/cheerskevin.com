@@ -10,6 +10,8 @@ You'll see a lot of folks advocating for some form of review at the end (or begi
 
 **The Clean Slate!**
 
+![Clean Slate](/images/clean-slate.jpg)
+
 All too often, it's easy to carry a bad mood forward from week to week. Some weeks, I feel like I didn't get as much done as I would like to, and before I had a weekly review process, it was easy to carry that pessimism forward into the next Monday. Not anymore! 
 
 Now it's a clean slate, no matter how the prior week went. And that feels fantastic.
