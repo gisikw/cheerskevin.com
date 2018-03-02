@@ -6,23 +6,23 @@ date: 2018-03-02
 
 In a previous post, we walked through [how to have responsive cross-origin iframes.](/2018/02/13/responsive-cross-origin-iframes.html) We had to apply a little elbow grease and use `postMessage` to support communication across the documents, but fixed the big problem with iframes: that they don't have dynamic height.
 
-But in practice, you can often get away with asking people to embed a little bit of JavaScript. In fact, even our previous example required a little bit to handle the communication layer. If we can do this, then perhaps we don't need to serve something cross-domain at all!
+In practice, you can often get away with asking people to embed a little bit of JavaScript. In fact, even our previous example required a little bit to handle the communication layer. If we can do this, then perhaps we don't need to concern ourselves with cross-domain restrictions at all!
 
 ## Why iframe at all?
 
-If we're not relying on iframes for security, then why use iframes at all? One reason is to avoid conflicting stylesheets. You never know what `!important` attributes you're going to encounter, and throwing your content into an iframe ensures that the parent page's styling rules won't cascade into your own.
+If we're not relying on iframes for security, then why use iframes in the first place? One reason is to avoid conflicting stylesheets. You never know what `!important` attributes you're going to encounter, and throwing your content into an iframe ensures that the parent page's styling rules won't cascade into your own.
 
 *Note: better yet, you could leverage the Shadow DOM! [Except &mdash; sadly &mdash; you can't](https://caniuse.com/#feat=shadowdom)*
 
 ## Creating friendly iframes
 
-So let's create a friendly iframe. That is, an iframe which won't throw up nasty cross-origin complaints if we run JavaScript inside of it. First, we'll open an iframe to a blank page.
+So let's create a friendly iframe. That is: an iframe which won't throw up nasty cross-origin complaints if we run JavaScript inside of it. First, we'll open an iframe to a blank page.
 
 ```html
 <iframe id="unique" src="about:blank"></iframe>
 ```
 
-And then, we can just write content into it with JavaScript:
+Then we can write content into it with JavaScript:
 
 ```html
 <iframe id="unique" src="about:blank"></iframe>
@@ -81,9 +81,9 @@ targets.forEach(script => {
 
 ## Dynamic resizing time
 
-We can use similar tricks to ensure our iframe resizes with the content. Only this time, we don't need to rely on `postMessage` and crazy listeners. This time, we can size the iframe directly. We'll modify our `onload` script to handle all the logic for us.
+We can use similar tricks to ensure our iframe resizes with the content. Only this time, we don't need to rely on `postMessage` and crazy listeners. This time, we can set the iframe height directly. We'll modify our `onload` script to handle all the logic for us.
 
-One minor quirk: in some browsers, the body element's clientHeight may use the size of the iframe &mdash; rather than the size of the contents &mdash; when using a friendly iframe. To combat this, we'll use a top-level wrapper div to  measure the true height of the iframe's contents.
+One minor quirk: in some browsers, the body element's clientHeight may use the size of the iframe &mdash; rather than the size of its contents &mdash; when using a friendly iframe. To combat this, we'll use a top-level wrapper div to  measure the true height of the iframe's contents.
 
 ```js
 const OUR_SRC = "https://our-own-domain.muwahaha.com";
@@ -131,6 +131,6 @@ We cut a few corners for this example, but here are some further items to consid
 
 ## Friendly iframes: all the fun with none of the security!
 
-Our resulting embed code (`<script async src="https://our-own-domain.muwahaha.com"></script>`) ends up being pretty darned tiny for our clients. But in exchange, we are asking for the client to trust us not to be evil with our JavaScript. In practice, we can probably get away with this, since many clients are used to similar embed styles from Facebook, Twitter, and the like. And this way, we have a clean mechanism for isolating our code from the host's CSS.
+Our resulting embed code (`<script async src="https://our-own-domain.muwahaha.com"></script>`) ends up being pretty darned tiny for our clients. But in exchange, we are asking for the client to trust us not to be evil with our JavaScript. In practice, we can probably get away with this, since many clients are used to similar embed styles from Facebook, Twitter, and the like. The result is a tiny embed code that still avoids concerns over CSS conflicts.
 
-But for skittish hosts with greater security needs, keep in mind that we can still provide a responsive experience with secure iframes via `postMessage`. [It just requires more code on the client side](/2018/02/13/responsive-cross-origin-iframes.html).
+For skittish hosts with greater security needs, keep in mind that we can still provide a responsive experience with secure iframes via `postMessage`. [It just requires more code on the client side](/2018/02/13/responsive-cross-origin-iframes.html).
