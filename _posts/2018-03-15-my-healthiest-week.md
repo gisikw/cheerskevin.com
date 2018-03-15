@@ -23,7 +23,7 @@ I know I was at my healthiest between August and December of 2016. But let's go 
 - Sleep quantity
 - Blood pressure
 
-Nutrition would be great to look at as well, but some bad memories of playing with MyFitnessPal's API scares me off of that a bit.
+Nutrition would be great to look at as well, but some bad memories of playing with MyFitnessPal's API scare me off of that a bit.
 
 I would *love* to be able to track meditation -- in fact, I suspect it's a key factor -- but unfortunately I had started using Headspace at that time, and they don't seem to provide data export (as an aside, [Insight Timer](https://insighttimer.com) provides all the data, and it's free!)
 
